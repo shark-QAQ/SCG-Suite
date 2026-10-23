@@ -1,0 +1,11 @@
+- insert:
+    - id: scg-guard
+      name: 'dsh-scg-guard'
+      config:
+        enabled: true
+        mode: enforce
+        auditPath: .scg/audit.jsonl
+        failClosed: true
+        lockdownOnTaint: true
+        egressProxy: true
+        networkIsolation: proxy
