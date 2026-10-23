@@ -4,6 +4,8 @@
 
 基于 DeepSeek Harness（DSH），用真实 headless E2E 验证整条链路。
 
+🔗 **仓库**：`https://github.com/shark-QAQ/SCG-Suite`
+
 > 📹 演示 GIF：录制分镜见 [`docs/gif-script.md`](docs/gif-script.md)
 >
 > **状态：Phase 1 垂直切片。** 范围明确、证据齐全、边界公开。
