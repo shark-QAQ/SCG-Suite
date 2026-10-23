@@ -1,5 +1,7 @@
 # SCG Runtime
 
+[![CI](https://github.com/shark-QAQ/SCG-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/shark-QAQ/SCG-Suite/actions/workflows/ci.yml)
+
 **给自主编码 Agent 的会话级安全护栏——一旦它碰到凭据，就把这个会话关进「只读文件沙箱 + 受限网络出口」的笼子里，并把整个决策过程写成可校验、可回放的审计链。**
 
 基于 DeepSeek Harness（DSH），用真实 headless E2E 验证整条链路。
