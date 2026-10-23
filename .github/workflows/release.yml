@@ -1,9 +1,17 @@
 name: Release
 
+# 只在手动触发时运行。
+# 原先是 `on: push: tags: v*`，导致每次打 tag 都会尝试 npm publish；
+# 未配置 NPM_TOKEN 时该步骤必然失败，把 tag 对应的提交挂成红色。
+# 本项目对外交付物是 `pnpm pack:bundle` 生成的 tarball，
+# npm 发布是可选的后续动作，需要先配置 NPM_TOKEN。
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      confirm_publish:
+        description: '输入 publish 以确认发布到 npm'
+        required: true
+        default: ''
 
 permissions:
   contents: read
@@ -12,6 +20,8 @@ jobs:
   publish:
     name: Publish dsh-scg-guard to npm
     runs-on: ubuntu-latest
+    # 双重保险：没输入 publish 就整体跳过，不会产生无意义的红色
+    if: ${{ inputs.confirm_publish == 'publish' }}
     steps:
       - uses: actions/checkout@v4
 
