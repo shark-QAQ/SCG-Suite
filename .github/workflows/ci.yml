@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  node:
+    name: Runtime (Node)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.14.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install (project-local store)
+        run: pnpm install --frozen-lockfile
+
+      - name: Isolation check
+        run: pnpm check:isolation
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Demo
+        run: pnpm demo
+
+      - name: Benchmark
+        run: pnpm bench
+
+      - name: Static dashboard
+        run: node apps/console/generate.mjs
+
+      - name: Pack self-contained bundle
+        run: pnpm pack:bundle
+
+  netns:
+    name: Linux netns egress
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.14.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Enable unprivileged user namespaces
+        run: sudo sysctl -w kernel.unprivileged_userns_clone=1 || true
+
+      - name: Verify netns isolation
+        run: node scripts/verify-netns.mjs
+        env:
+          SCG_REQUIRE_NETNS: '1'
+
+  windows:
+    name: Runtime (Windows / pwsh)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.14.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Benchmark
+        run: pnpm bench
+
+  python:
+    name: Code Gate (Python)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: SCG
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Sync
+        run: uv sync
+
+      - name: Test
+        run: uv run pytest -q
