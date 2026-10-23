@@ -264,6 +264,7 @@ esbuild 把 `@scg/core`、`@scg/events`、`@scg/egress`、`@scg/netns` 全部内
 
 | 文档 | 内容 |
 | --- | --- |
+| [📝 CSDN 技术长文](https://blog.csdn.net/q18403417955/article/details/168877990) | 《当 AI Agent 读到 .env 之后会发生什么》——完整攻击场景与设计取舍 |
 | [`docs/demo.md`](docs/demo.md) | 5 分钟演示脚本 |
 | [`docs/gif-script.md`](docs/gif-script.md) | 60 秒 GIF 分镜与录制命令 |
 | [`docs/evidence.md`](docs/evidence.md) | 每个数字的复现方式 |
