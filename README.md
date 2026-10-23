@@ -267,7 +267,6 @@ esbuild 把 `@scg/core`、`@scg/events`、`@scg/egress`、`@scg/netns` 全部内
 | [`docs/evidence.md`](docs/evidence.md) | 每个数字的复现方式 |
 | [`docs/known-gaps.md`](docs/known-gaps.md) | 已知绕过与剩余缺口 |
 | [`docs/threat-model.md`](docs/threat-model.md) | 威胁模型与信任边界 |
-| [`docs/harness-internals.md`](docs/harness-internals.md) | DSH Harness 内部机制 |
 | [`docs/desktop.md`](docs/desktop.md) | Desktop 接入 |
 | [`docs/development.md`](docs/development.md) | 开发与隔离规范 |
 
