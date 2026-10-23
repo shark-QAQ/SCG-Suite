@@ -1,0 +1,26 @@
+# Dependencies and build outputs
+node_modules/
+dist/
+*.tgz
+
+# Project-local caches (uv / pnpm / DSH test home)
+.cache/
+.dsh-home/
+
+# Python
+.venv/
+__pycache__/
+*.py[oc]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+wheels/
+*.egg-info
+
+# Local audit/demo artifacts
+*.jsonl
+.scg/
+demo/out/
+benchmark/out/
+.private/

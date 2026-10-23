@@ -1,0 +1,27 @@
+{
+  "name": "scg-suite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SCG Runtime — taint-aware session guard for DeepSeek Harness",
+  "scripts": {
+    "build": "pnpm -r --sort run build",
+    "test": "pnpm -r --sort run test",
+    "typecheck": "pnpm -r --sort run typecheck",
+    "check:isolation": "node scripts/check-isolation.mjs",
+    "check:netns": "node scripts/verify-netns.mjs",
+    "demo": "pnpm build && node demo/rogue-agent.mjs",
+    "demo:all": "node scripts/demo-all.mjs",
+    "bench": "pnpm build && node benchmark/run.mjs",
+    "dashboard": "pnpm demo && node apps/console/generate.mjs",
+    "console": "node apps/console/server.mjs",
+    "dsh:setup": "node scripts/setup-dsh-home.mjs",
+    "dsh:verify": "node scripts/verify-dsh.mjs",
+    "pack:bundle": "pnpm --filter dsh-scg-guard exec npm pack --silent",
+    "e2e": "node scripts/e2e-headless.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT"
+}
