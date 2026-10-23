@@ -6,7 +6,7 @@
 
 🔗 **仓库**：`https://github.com/shark-QAQ/SCG-Suite`
 
-![SCG Runtime 策略核心演示：读 .env → ASK → taint → 外联 DENY → 回放](docs/assets/demo.svg)
+![SCG Runtime 策略核心演示：读 .env → ASK → taint → 外联 DENY → 回放](docs/assets/demo.gif)
 
 > **状态：Phase 1 垂直切片。** 范围明确、证据齐全、边界公开。
 
