@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCG Runtime — Live Audit</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <div class="brand">SCG<span>Runtime</span></div>
+  <div class="subtitle">Live audit console</div>
+  <div class="live" id="live"><span class="dot"></span><span id="live-text">connecting…</span></div>
+</header>
+
+<main>
+  <div class="path" id="audit-path">loading audit path…</div>
+
+  <section class="metrics" id="metrics"></section>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Decision timeline</h2>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="toolbar">
+        <button data-filter="all" class="active">All</button>
+        <button data-filter="allow">Allow</button>
+        <button data-filter="ask">Ask</button>
+        <button data-filter="deny">Deny</button>
+        <input id="search" type="search" placeholder="search command / reason / policy">
+      </div>
+      <div id="timeline"><p class="muted">Loading…</p></div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>Taint chain</h2>
+        <div id="taint"><p class="muted">No taint recorded yet.</p></div>
+      </div>
+
+      <div class="panel">
+        <h2>Defense in depth</h2>
+        <div class="layers">
+          <div class="layer"><span class="dot l1"></span><div><strong>L1 · Cedar policy</strong><small>allow / ask / deny</small></div></div>
+          <div class="layer"><span class="dot l2"></span><div><strong>L2 · DSH sandbox</strong><small>taint → read-only file effects</small></div></div>
+          <div class="layer"><span class="dot l2"></span><div><strong>L2.5 · Egress proxy</strong><small>proxy-aware egress blocked</small></div></div>
+          <div class="layer"><span class="dot l2"></span><div><strong>L2.6 · Linux netns</strong><small>optional raw-socket isolation</small></div></div>
+          <div class="layer"><span class="dot l3"></span><div><strong>L3 · Hash-chain audit</strong><small>deterministic replay</small></div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Deterministic replay</h2>
+        <div id="replay"><p class="muted">Run <code>pnpm demo</code> to populate replay data.</p></div>
+      </div>
+
+      <div class="panel">
+        <h2>SCG-Bench v0.1</h2>
+        <div id="bench"><p class="muted">Run <code>pnpm bench</code> to populate benchmark data.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  SCG Runtime · live events from <code>.scg/audit.jsonl</code> or
+  <code>demo/out/audit.jsonl</code>
+</footer>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
