@@ -25,11 +25,13 @@ jobs:
       - name: Isolation check
         run: pnpm check:isolation
 
-      - name: Typecheck
-        run: pnpm typecheck
-
+      # 必须先 build：dsh-scg-guard 依赖 @scg/* 的类型声明，
+      # 而它们来自各包的 dist/index.d.ts（dist 不入库，干净检出时不存在）。
       - name: Build
         run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
 
       - name: Test
         run: pnpm test
@@ -95,11 +97,11 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck
-        run: pnpm typecheck
-
       - name: Build
         run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
 
       - name: Test
         run: pnpm test
