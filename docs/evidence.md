@@ -144,9 +144,15 @@ pnpm check:isolation
 pnpm check:netns
 ```
 
-**预期**：Linux 上通过；Windows 自动 skip。
+**预期**：Linux 且环境允许非特权 user namespace 时，输出 `netns local command: netns-ok` 与 `netns external TCP blocked: true`；其余情况打印跳过原因并以 0 退出。
 
-**说明**：依赖 unprivileged user namespaces，嵌套容器里可能被禁止——这时会回退 proxy，而不是拒绝全部命令。
+**说明**：依赖非特权 user namespaces。Ubuntu 23.10+ 起该能力默认受 AppArmor 限制（`kernel.apparmor_restrict_unprivileged_userns`），嵌套容器里也可能被禁止——这时探针会跳过，运行时回退到 egress proxy，而不是拒绝全部命令。
+
+想强制校验（环境不满足即失败）：
+
+```bash
+SCG_REQUIRE_NETNS=1 pnpm check:netns
+```
 
 ---
 
