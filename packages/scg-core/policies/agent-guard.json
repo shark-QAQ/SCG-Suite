@@ -1,0 +1,9 @@
+{
+  "permit-low-risk": "permit (principal, action, resource) when { context.risk_level == \"low\" };",
+  "permit-approved": "permit (principal, action, resource) when { context.approved == true };",
+  "ask-medium-risk": "forbid (principal, action, resource) when { context.risk_level == \"medium\" && context.approved == false };",
+  "ask-high-risk": "forbid (principal, action, resource) when { context.risk_level == \"high\" && context.approved == false };",
+  "ask-destructive": "forbid (principal, action, resource) when { context.destructive == true && context.approved == false };",
+  "deny-tainted-egress": "forbid (principal, action, resource) when { context.tainted_egress == true };",
+  "deny-critical": "forbid (principal, action, resource) when { context.risk_level == \"critical\" };"
+}
